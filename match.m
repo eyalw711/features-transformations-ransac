@@ -24,7 +24,7 @@ for i = 1: size(des1,1)
   if (match(i) > 0)
       %matches(m, :) = [loc1(i,2) loc2(match(i),2)+cols1 loc1(i,1) loc2(match(i),1)];
       matches(m, :) = [loc1(i,2) loc1(i,1) loc2(match(i),2) loc2(match(i),1)];
-      dist_vals(m) =  dist_vals_full(m);
+      dist_vals(m) =  dist_vals_full(i);
       m = m + 1;
   end
 end
