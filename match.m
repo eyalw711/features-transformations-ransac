@@ -1,3 +1,5 @@
+% image1, image2 are filenames!
+% distRatio is a double
 function [num_matches, matches, dist_vals] = match(image1, image2, distRatio)
 [im1, des1, loc1] = sift(image1);
 [im2, des2, loc2] = sift(image2);
@@ -13,18 +15,19 @@ for i = 1 : size(des1,1)
       dist_vals_full(i) = vals(1) / vals(2);
    else
       match(i) = 0;
+      dist_vals_full(i) = 0;
    end
 end
 num_matches = sum(match > 0);
 matches = zeros(num_matches, 4);
 dist_vals = zeros(num_matches, 1);
+
 m = 1;
-cols1 = size(im1,2);
 for i = 1: size(des1,1)
   if (match(i) > 0)
       %matches(m, :) = [loc1(i,2) loc2(match(i),2)+cols1 loc1(i,1) loc2(match(i),1)];
       matches(m, :) = [loc1(i,2) loc1(i,1) loc2(match(i),2) loc2(match(i),1)];
-      dist_vals(m) =  dist_vals_full(m);
+      dist_vals(m) =  dist_vals_full(i);
       m = m + 1;
   end
 end
