@@ -17,11 +17,15 @@ TransformedIm = imread(image2name);
 %displayedCorr = DisplayCorr(Im, TransformedIm, matches, dist_vals, 10);
 
 %% Q3
+
 H_comp = DLT(matches);
+%H_comp
 
 %% Q4
+
 [pnts_gt, pnts_computed] = ComputeTestPoints(H, H_comp);
 error_dlt = ComputeError(pnts_gt, pnts_computed);
+%error_dlt
 
 %% Q5
 s = 10;
@@ -38,16 +42,4 @@ fprintf('RANSAC error is %.3g%% of DLT error\n', 100*error_ransac/error_dlt);
 
 inv_trans_ransac = invert(affine2d(H_ransac));
 reconstructed_ransac = imwarp(TransformedIm, inv_trans_ransac);
-
-% fix H_comp if valid:
-if sum(abs(H_comp(1:2,3))) < 0.01
-    H_comp(:,3) = [0; 0; 1];
-    inv_trans_dlt = invert(affine2d(H_comp));
-    reconstructed_dlt = imwarp(TransformedIm, inv_trans_dlt);
-    imshowpair(reconstructed_ransac, imresize(reconstructed_dlt, size(reconstructed_ransac)), 'montage');
-else
-    printf('H_comp is not affine and qualitative evaluation is not possible.\n');
-end
-
-
-
+imshowpair(Im, reconstructed_ransac);

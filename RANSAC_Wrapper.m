@@ -1,3 +1,4 @@
 function [H_ransac] = RANSAC_Wrapper(matches, fittingfn, distfn, degenfn, s, t, feedback, maxDataTrials, maxTrials)
-    fprintf('todo implement :)');
+    [H_ransac, ~] = ransac(matches', fittingfn, distfn, degenfn, s, t, feedback, ...
+                               maxDataTrials, maxTrials);
 end

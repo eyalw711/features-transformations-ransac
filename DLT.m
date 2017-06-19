@@ -17,7 +17,7 @@ function [ H ] = DLT( matches )
     
     [U,S,V] = svd(A);
     h = V(:,end);
-    H = (Txtag^-1)* reshape(h,3,3)' * Tx;
+    H = ((Txtag^-1)* reshape(h,3,3)' * Tx)';
 end
 
 % pts is a matrix with rows like: [xs ys 1]

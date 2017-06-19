@@ -192,7 +192,7 @@ function [M, inliers] = ransac(x, fittingfn, distfn, degenfn, s, t, feedback, ..
         % Find the number of inliers to this model.
         ninliers = length(inliers);
         
-        if ninliers > bestscore    % Largest set of inliers so far...
+        if ninliers >= bestscore    % Largest set of inliers so far...
             bestscore = ninliers;  % Record data for this model
             bestinliers = inliers;
             bestM = M;
